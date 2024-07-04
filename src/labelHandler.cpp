@@ -41,6 +41,8 @@ int labelHandler::loadLabels(std::string sequence) {
             std::cerr << "Error reading line: " << line << std::endl;
         }
     }
+    std::cout << "Read " << m_labels.size() << " labels from file \"" << path << "\"\n";
+
     return 0;
 
 }
