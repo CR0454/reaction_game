@@ -13,23 +13,21 @@ public:
     Gui(std::string sequence):
         m_imageN(0),
         m_sequence(sequence)
-        {loadLabels();}    //Labels are automatically loaded when an object is created
+        {}
 
-    int refreshImage();         //Takes the next image in the sequence and displays it
+    void refreshImage(cv::Mat);         //Display the input image on the screen
 
-    int loadLabels();           //Load all Labels for the selected sequence without "DontCare"
+    cv::Mat nextImage();                //Load the next image in the sequence
 
-    std::vector<Label> getFrameLabels();        //Return all Labels associated with the currently shown image
+    void drawBox(Label, cv::Mat, int, int, int);        //Draws the specified label on the currently shown image
 
-    void drawBox(Label, int, int, int);        //Draws the specified label on the currently shown image
+    int getImageN();                    //Return the current frame number
 
 private:
     std::string getPath();      //Private function to generate the complete path and filename for the current image
 
-    cv::Mat image;              //Current image loaded into OpenCV
     int m_imageN;               //Image number in sequence
     std::string m_sequence;     //Used image sequence
-    std::vector<Label> m_labels;        //All labels for the sequence as loaded by loadLabels()
 
 
 };
