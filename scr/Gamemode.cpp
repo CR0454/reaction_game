@@ -45,6 +45,8 @@ bool Gamemode::compareClick(label labelToClick) {
     clickhandler clickhandler();
     labelHandler labelhandler();
 
+    clickhandler.primeMouseClick("Reaction Game");
+
     vector<int> clickPosition = clickhandler.getPosition();
     if (clickPosition[0] == -1 && clickPosition[1] == -1) {
         printf("No click found\n");

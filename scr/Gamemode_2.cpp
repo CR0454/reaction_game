@@ -17,6 +17,7 @@ Gamemode_2::~Gamemode_2() {
 double Gamemode_2::run() {
     labelHandler labelhandler();
     Gui gui(sequenz);
+    Timer timer();
 
     for (int i = 0; i < count; ++i) {
 
@@ -42,7 +43,6 @@ double Gamemode_2::run() {
 
         gui.refreshImage(image);
 
-        Timer timer();
         timer.setTimer();
 
         while (!timerGreaterThan(10)) {
