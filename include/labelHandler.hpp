@@ -13,7 +13,9 @@ public:
 
     int loadLabels(std::string sequence);           //Load all Labels for the selected sequence without "DontCare"
 
-    std::vector<Label> getFrameLabels(int);        //Return all Labels associated with the input image
+    std::vector<Label> getFrameLabels(int frame);        //Return all Labels associated with the input image
+
+    std::vector<int> getBoxPosition(Label label);     //Return position of label
 
 private:
     std::vector<Label> m_labels;                    //Vector for all labels in the sequence

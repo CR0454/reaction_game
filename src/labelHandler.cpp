@@ -59,3 +59,13 @@ std::vector<Label> labelHandler::getFrameLabels(int frame) {
     }
     return frameLabels;
 }
+
+std::vector<int> labelHandler::getBoxPosition(Label label) {
+    std::vector<int> boxPosition;
+    boxPosition.push_back(label.m_bbox.x);
+    boxPosition.push_back(label.m_bbox.y);
+    boxPosition.push_back(label.m_bbox.x + label.m_bbox.width);
+    boxPosition.push_back(label.m_bbox.y + label.m_bbox.height);
+
+    return boxPosition;
+}
