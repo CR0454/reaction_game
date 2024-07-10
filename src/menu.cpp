@@ -1,5 +1,5 @@
 #include <iostream>
-#include "menu.hpp"
+#include "../include/menu.hpp"
 
 void Menu::setN() //keine Parameter, da die Werte direkt eingelesen werden in der Funktion
 {

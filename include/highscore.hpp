@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #ifndef HIGHSCORE_CPP_INCLUDED
 #define HIGHSCORE_CPP_INCLUDED
 
