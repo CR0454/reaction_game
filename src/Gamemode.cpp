@@ -2,12 +2,8 @@
 // Created by matti on 05.07.2024.
 //
 
-#include "Gamemode.h"
-#include "gui.hpp"
-#include "label.hpp"
-#include "labelhandler.hpp"
-#include "timer.hpp"
-#include "clickhandler.hpp"
+#include "../include/Gamemode.h"
+#include "../include/clickhandler.hpp"
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -15,9 +11,6 @@
 
 using namespace std;
 
-
-Gamemode::Gamemode(int count, string sequenz) : count(count), sequenz(sequenz) {
-}
 
 Gamemode::~Gamemode() {
 
@@ -27,8 +20,8 @@ double Gamemode::run() {
     return 0;
 }
 
-label Gamemode::randomLabel(vector<label> labels) {
-    labelHandler labelhandler();
+Label Gamemode::randomLabel(vector<Label> labels) {
+    labelHandler labelhandler;
 
     unsigned seed = chrono::steady_clock::now().time_since_epoch().count();
     mt19937 rng(seed);
@@ -36,27 +29,23 @@ label Gamemode::randomLabel(vector<label> labels) {
 
     int randomIndex = distribution(rng);
 
-    label randomLabel = labels[randomIndex];
+    Label randomLabel = labels[randomIndex];
     return randomLabel;
 }
 
-bool Gamemode::compareClick(label labelToClick) {
+bool Gamemode::compareClick(Label labelToClick, clickHandler clickH) {
+    labelHandler labelhandler;
 
-    clickhandler clickhandler();
-    labelHandler labelhandler();
-
-    clickhandler.primeMouseClick("Reaction Game");
-
-    vector<int> clickPosition = clickhandler.getPosition();
-    if (clickPosition[0] == -1 && clickPosition[1] == -1) {
+    vector<int> clickPosition = clickH.getPosition();
+    if (clickPosition[0] == -1 || clickPosition[1] == -1) {
         printf("No click found\n");
         return false;
     }
-    int click_x = position[0];
-    int click_y = position[1];
+    int click_x = clickPosition[0];
+    int click_y = clickPosition[1];
 
     vector<int> boxPosition = labelhandler.getBoxPosition(labelToClick);
-    if (boxPosition[0] == -1 && boxPosition[1] == -1 && boxPosition[2] == -1 && boxPosition[3] == -1) {
+    if (boxPosition[0] == -1 || boxPosition[1] == -1 || boxPosition[2] == -1 || boxPosition[3] == -1) {
         printf("No box found\n");
         return false;
     }

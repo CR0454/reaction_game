@@ -15,7 +15,11 @@ public:
         m_sequence(sequence)
         {}
 
-    void refreshImage(cv::Mat);         //Display the input image on the screen
+    //void refreshImage(cv::Mat);         //Display the input image on the screen
+
+    void createWindow(std::string winName);
+
+    void refreshWindow(std::string winName, cv::Mat image);
 
     cv::Mat nextImage();                //Load the next image in the sequence
 

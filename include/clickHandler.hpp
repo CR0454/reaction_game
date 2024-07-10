@@ -11,7 +11,7 @@
 class clickHandler {
 public:
 
-    clickHandler(): clickx(-1), clicky(-1) {}
+    clickHandler(): clickx(-1), clicky(-1), clickBool(false) {}
 
     static void CallBackFunc(int event, int x, int y, int flags, void* userdata);           //Bridge function to call "CallBackFunc(event,x,y)"
 
@@ -19,10 +19,15 @@ public:
 
     std::vector<int> getPosition();         //Return the x and y position from last mouse click
 
+    bool checkClick();
+    void primeClick();
+
 private:
     void CallBackFunc(int event, int x, int y);     //React to left mouse click
 
     int clickx, clicky;
+
+    bool clickBool;
 
 };
 

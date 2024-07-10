@@ -7,6 +7,7 @@ void clickHandler::CallBackFunc(int event, int x, int y) {
     if(event == cv::EVENT_LBUTTONDOWN) {        //Nur bei linkem Mausklick
         clickx = x;
         clicky = y;
+        clickBool = true;
     }
 }
 
@@ -17,10 +18,18 @@ void clickHandler::CallBackFunc(int event, int x, int y, int flags, void *userda
 }
 
 void clickHandler::primeMouseClick(std::string windowName) {
-    cv::setMouseCallback(windowName, CallBackFunc, this);
+    cv::setMouseCallback(windowName, CallBackFunc, NULL);
 }
 
 std::vector<int> clickHandler::getPosition() {
     std::vector<int> pos = {clickx, clicky};
     return pos;
+}
+
+void clickHandler::primeClick() {
+    clickBool = false;
+}
+
+bool clickHandler::checkClick() {
+    return clickBool;
 }

@@ -8,11 +8,11 @@
 #include <chrono>
 
 
-class timer {
+class Timer {
 public:
-    timer() {}
+    Timer() {}
 
-    void setTimer();        //Set start for timer
+    void setTimer();        //Set start for Timer
 
     double getTimer();      //Return time since start in seconds
 

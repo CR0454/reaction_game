@@ -10,7 +10,7 @@
 
 class Gamemode_2 : public Gamemode {
 public:
-    Gamemode_2(int count, std::string sequenz);
+    Gamemode_2(int count, std::string sequenz): Gamemode(count, sequenz) {}
     virtual ~Gamemode_2();
     double run() override;
 };

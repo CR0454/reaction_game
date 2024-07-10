@@ -2,35 +2,34 @@
 // Created by matti on 05.07.2024.
 //
 
-#include "Gamemode_2.h"
+#include "../include/Gamemode_2.h"
 #include <random>
 #include <chrono>
 #include <thread>
-
-Gamemode_2::Gamemode_2(int count, std::string sequenz) : Gamemode(count, sequenz) {
-}
 
 Gamemode_2::~Gamemode_2() {
 
 }
 
 double Gamemode_2::run() {
-    labelHandler labelhandler();
+    labelHandler labelhandler;
     Gui gui(sequenz);
-    Timer timer();
+    Timer timer;
+
+    labelhandler.loadLabels(sequenz);
 
     for (int i = 0; i < count; ++i) {
 
         cv::Mat image = gui.nextImage();
 
-        labes_of_image = labelhandler.getFrameLabels(gui.getImageN());
+        std::vector<Label> labels_of_image = labelhandler.getFrameLabels(gui.getImageN());
 
-        label random_label = randomLabel(labels_of_image);
+        Label random_label = randomLabel(labels_of_image);
 
-        drawBox(random_label, image, 0);
+        gui.drawBox(random_label, image, 255, 0, 0);
 
         for(int i = 0; i < labels_of_image.size(); i++) {
-            drawBox(labels_of_image[i], image, 2);
+            gui.drawBox(labels_of_image[i], image, 0, 0, 255);
         }
 
 
@@ -41,17 +40,23 @@ double Gamemode_2::run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(randomMilliseconds));
 
 
-        gui.refreshImage(image);
+        //gui.refreshImage(image);
 
         timer.setTimer();
 
-        while (!timerGreaterThan(10)) {
-            if (compareClick(random_label)) {
-                score += timer.getTimer();
-                printf("Correct click\n, time: %d\n", timer.getTimer());
-            } else {
-                score += (timer.getTimer() + 5);
-                printf("Incorrect click\n, time: %d \nplus 5sek punishment\n", timer.getTimer());
+        clickHandler clickhandler;
+
+        clickhandler.primeMouseClick("Reaction Game");
+
+        while (!timer.timeGreater(10)) {
+            if(clickhandler.checkClick()) {
+                if (compareClick(random_label, clickhandler)) {
+                    score += timer.getTimer();
+                    printf("Correct click\n, time: %d\n", timer.getTimer());
+                } else {
+                    score += (timer.getTimer() + 5);
+                    printf("Incorrect click\n, time: %d \nplus 5sek punishment\n", timer.getTimer());
+                }
             }
         }
     }

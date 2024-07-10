@@ -2,40 +2,49 @@
 // Created by matti on 05.07.2024.
 //
 
-#include "Gamemode_1.h"
-
-Gamemode_1::Gamemode_1(int count, string sequenz) : count(count), sequenz(sequenz) {
-}
+#include "../include/Gamemode_1.h"
+#include <thread>
 
 Gamemode_1::~Gamemode_1() {
 
 }
 
 double Gamemode_1::run() {
-    labelHandler labelhandler();
+    labelHandler labelhandler;
     Gui gui(sequenz);
-    Timer timer();
+    Timer timer;
+
+    labelhandler.loadLabels(sequenz);
+    cv::namedWindow("Reaction Game", 1);
 
     for (int i = 0; i < count; ++i) {
 
         cv::Mat image = gui.nextImage();
 
-        label random_label = randomLabel(labelhandler.getFrameLabels(gui.getImageN()));
+        Label random_label = randomLabel(labelhandler.getFrameLabels(gui.getImageN()));
 
-        drawBox(random_label, image, 0);
+        gui.drawBox(random_label, image, 255, 0, 0);
 
-        gui.refreshImage(image);
+        gui.refreshWindow("Reaction Game", image);
 
         timer.setTimer();
 
-        while (!timerGreaterThan(10)) {
-            if (compareClick(random_label)) {
-                score += timer.getTimer();
-                printf("Correct click\n, time: %d\n", timer.getTimer());
-            } else {
-                score += (timer.getTimer() + 5);
-                printf("Incorrect click\n, time: %d \nplus 5sek punishment\n", timer.getTimer());
+        clickHandler clickhandler;
+        clickhandler.primeMouseClick("Reaction Game");
+
+        while (!timer.timeGreater(10)) {
+            if(clickhandler.checkClick()) {
+                if (compareClick(random_label, clickhandler)) {
+                    score += timer.getTimer();
+                    printf("Correct click\n, time: %d\n", timer.getTimer());
+                } else {
+                    score += (timer.getTimer() + 5);
+                    printf("Incorrect click\n, time: %d \nplus 5sek punishment\n", timer.getTimer());
+                }
+                break;
             }
+            this_thread::sleep_for(chrono::milliseconds(10));
+
         }
     }
     return score / count;
