@@ -32,14 +32,15 @@ double Gamemode_1::run() {
         clickHandler clickhandler;
         clickhandler.primeMouseClick("Reaction Game");
 
-        while (!timer.timeGreater(10)) {
+        while (!timer.timeGreater(3)) {
+            gui.refreshWindow("Reaction Game", image);
             if(clickhandler.checkClick()) {
-                if (compareClick(random_label, clickhandler)) {
+                if (compareClick(random_label, &clickhandler)) {
                     score += timer.getTimer();
-                    printf("Correct click\n, time: %d\n", timer.getTimer());
+                    printf("Correct click\n, time: %f\n", timer.getTimer());
                 } else {
                     score += (timer.getTimer() + 5);
-                    printf("Incorrect click\n, time: %d \nplus 5sek punishment\n", timer.getTimer());
+                    printf("Incorrect click\n, time: %f \nplus 5sek punishment\n", timer.getTimer());
                 }
                 break;
             }

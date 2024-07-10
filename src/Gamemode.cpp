@@ -33,10 +33,10 @@ Label Gamemode::randomLabel(vector<Label> labels) {
     return randomLabel;
 }
 
-bool Gamemode::compareClick(Label labelToClick, clickHandler clickH) {
+bool Gamemode::compareClick(Label labelToClick, clickHandler *clickH) {
     labelHandler labelhandler;
 
-    vector<int> clickPosition = clickH.getPosition();
+    vector<int> clickPosition = clickH -> getPosition();
     if (clickPosition[0] == -1 || clickPosition[1] == -1) {
         printf("No click found\n");
         return false;

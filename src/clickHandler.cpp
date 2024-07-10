@@ -18,7 +18,7 @@ void clickHandler::CallBackFunc(int event, int x, int y, int flags, void *userda
 }
 
 void clickHandler::primeMouseClick(std::string windowName) {
-    cv::setMouseCallback(windowName, CallBackFunc, NULL);
+    cv::setMouseCallback(windowName, CallBackFunc, this);
 }
 
 std::vector<int> clickHandler::getPosition() {

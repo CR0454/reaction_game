@@ -6,12 +6,6 @@
 #include "../include/gui.hpp"
 #include <fstream>
 
-/*void Gui::refreshImage(cv::Mat image) {
-
-    cv::imshow("Reaction Game", image);
-    cv::waitKey(0);
-}*/
-
 void Gui::createWindow(std::string winName) {
     cv::namedWindow(winName, 1);
 }

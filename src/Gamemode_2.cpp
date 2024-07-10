@@ -50,7 +50,7 @@ double Gamemode_2::run() {
 
         while (!timer.timeGreater(10)) {
             if(clickhandler.checkClick()) {
-                if (compareClick(random_label, clickhandler)) {
+                if (compareClick(random_label, &clickhandler)) {
                     score += timer.getTimer();
                     printf("Correct click\n, time: %d\n", timer.getTimer());
                 } else {
