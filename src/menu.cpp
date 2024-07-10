@@ -3,10 +3,21 @@
 
 void Menu::setN() //keine Parameter, da die Werte direkt eingelesen werden in der Funktion
 {
-    std::cout<<"Wie viele Runden moechten Sie spielen? \n";
     int x;
-    std::cin>>x; //wird direkt von der Konsole eingelesen
-    n = x;
+    while(true) {
+        std::cout << "How many rounds would you like to play? \n";
+        std::cin >> x; //directly read in from the console
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(1000,'\n');
+            std::cout<<"Invalid expression, please enter a number\n";
+        }
+        else {
+            std::cin.ignore(1000,'\n');
+            Menu::n = x;
+            break;
+        }
+    }
 }
 
 int Menu::getN()
@@ -16,22 +27,33 @@ int Menu::getN()
 
 void Menu::setSequence()
 {
-    std::cout<<"Welche Sequenz moechten Sie spielen?\n";
+    std::cout<<"Which sequence would you like to play?\n";
     int y;
     std::cin>>y;
-    sequence = y;
+    if(std::cin.fail()){
+        std::cin.clear();
+        std::cin.ignore(1000,'\n');
+        std::cout<<"Invalid expression, please enter a number\n";
+    }
+    else {
+        std::cin.ignore(1000, '\n');
+
+        sequence = y;
+    }
 }
 std::string Menu::getSequence()
 {
     return sequence;
 }
+
 void Menu::setName()
 {
-    std::cout<<"Bitte geben Sie Ihren Spielernamen an: \n";
+    std::cout<<"Please enter your name: \n";
     std::string m_name;
     std::cin>>m_name;
     name = m_name;
 }
+
 std::string Menu::getName()
 {
     return name;
