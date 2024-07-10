@@ -31,7 +31,6 @@ void Highscore::setHighscore(double x) {
         fread.close();
         if (x < score || x == 0) {
             std::ofstream highscorefile; //Ausgabestreamobjekt definieren
-
             highscorefile.open("../highscore.txt", std::ofstream::ate);
             highscorefile << x;
             highscorefile.close();
@@ -39,8 +38,10 @@ void Highscore::setHighscore(double x) {
             std::cout << "Did not reach a new Highscore";
         }
     } else {
-        std::ofstream fread1("../highscore.txt");
-        std::cout << "There are no highscores stored yet, you are the first person to play this game";
+        std::ofstream fread;
+        fread.open("../highscore.txt", std::ofstream::ate);
         fread << x;
+        fread.close();
+        std::cout << "There are no highscores stored yet, you are the first person to play this game";
     }
 }
