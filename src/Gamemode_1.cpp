@@ -32,7 +32,7 @@ double Gamemode_1::run() {
         clickHandler clickhandler;
         clickhandler.primeMouseClick("Reaction Game");
 
-        while (!timer.timeGreater(3)) {
+        while (!timer.timeGreater(5)) {
             gui.refreshWindow("Reaction Game", image);
             if(clickhandler.checkClick()) {
                 if (compareClick(random_label, &clickhandler)) {
@@ -44,7 +44,7 @@ double Gamemode_1::run() {
                 }
                 break;
             }
-            this_thread::sleep_for(chrono::milliseconds(10));
+            this_thread::sleep_for(chrono::milliseconds(16));
 
         }
     }

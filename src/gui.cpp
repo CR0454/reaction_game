@@ -51,7 +51,7 @@ std::string Gui::getPath() {
 }
 
 void Gui::drawBox(Label label, cv::Mat image, int r, int g, int b) {
-    cv::rectangle(image, label.m_bbox, cv::Scalar(b, g, r));        //Draw specified rectangle on current image
+    cv::rectangle(image, label.m_bbox, cv::Scalar(b, g, r), 2);        //Draw specified rectangle on current image
 }
 
 int Gui::getImageN() {
