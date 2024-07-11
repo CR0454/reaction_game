@@ -38,5 +38,4 @@ cmake-build-debug
 .vscode
 label_02
 training
-src/main.cpp
 highscore.txt
