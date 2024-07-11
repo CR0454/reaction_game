@@ -17,6 +17,8 @@ double Gamemode_1::run() {
     labelhandler.loadLabels(sequenz);
     cv::namedWindow("Reaction Game", 1);
 
+    gui.pushToTop("Reaction Game");
+
     for (int i = 0; i < count; ++i) {
 
         cv::Mat image = gui.nextImage();

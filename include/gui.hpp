@@ -17,6 +17,8 @@ public:
 
     void createWindow(std::string winName);
 
+    void pushToTop(std::string winName);
+
     void refreshWindow(std::string winName, cv::Mat image);
 
     cv::Mat nextImage();                //Load the next image in the sequence

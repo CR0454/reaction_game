@@ -16,5 +16,5 @@ void Gamehandler::start() {
     std::cout << "Current highscore is " << highscore.getHighscore() << std::endl;
 
     gamemode = new Gamemode_1(menu.getN(), menu.getSequence());
-    gamemode -> run();
+    highscore.setHighscore(gamemode -> run());
 }

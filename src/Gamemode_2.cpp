@@ -18,6 +18,9 @@ double Gamemode_2::run() {
 
     labelhandler.loadLabels(sequenz);
 
+    gui.createWindow("Reaction Game");
+    gui.pushToTop("Reaction Game");
+
     for (int i = 0; i < count; ++i) {
 
         cv::Mat image = gui.nextImage();

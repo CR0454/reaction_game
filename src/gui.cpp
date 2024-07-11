@@ -10,6 +10,11 @@ void Gui::createWindow(std::string winName) {
     cv::namedWindow(winName, 1);
 }
 
+void Gui::pushToTop(std::string winName) {
+    cv::setWindowProperty(winName, cv::WND_PROP_TOPMOST, 1);
+    cv::setWindowProperty(winName, cv::WND_PROP_TOPMOST, 0);
+}
+
 void Gui::refreshWindow(std::string winName, cv::Mat img) {
     cv::imshow(winName, img);
     cv::waitKey(10);
