@@ -31,10 +31,11 @@
 *.out
 *.app
 
+=======
+
 cmake-build-debug
 .idea
 .vscode
 label_02
 training
-
 src/main.cpp
