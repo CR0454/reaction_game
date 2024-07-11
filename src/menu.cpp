@@ -28,7 +28,7 @@ int Menu::getN()
 void Menu::setSequence()
 {
     std::cout<<"Which sequence would you like to play?\n";
-    int y;
+    std::string y;
     std::cin>>y;
     if(std::cin.fail()){
         std::cin.clear();

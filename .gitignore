@@ -39,3 +39,4 @@ cmake-build-debug
 label_02
 training
 src/main.cpp
+highscore.txt
