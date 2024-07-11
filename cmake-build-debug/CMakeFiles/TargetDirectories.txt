@@ -1,3 +1,0 @@
-C:/Users/oezge/Git/reaction_game/cmake-build-debug/CMakeFiles/reaction_game.dir
-C:/Users/oezge/Git/reaction_game/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/oezge/Git/reaction_game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
