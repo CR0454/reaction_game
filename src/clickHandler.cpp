@@ -22,12 +22,8 @@ void clickHandler::primeMouseClick(std::string windowName) {
 }
 
 std::vector<int> clickHandler::getPosition() {
-    std::vector<int> pos = {clickx, clicky};
-    return pos;
-}
-
-void clickHandler::primeClick() {
-    clickBool = false;
+    std::vector<int> position = {clickx, clicky};        //Add the x and y coordinates of the last click to a vector
+    return position;
 }
 
 bool clickHandler::checkClick() {

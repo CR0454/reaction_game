@@ -15,7 +15,7 @@ double Gamemode_1::run() {
     Timer timer;
 
     labelhandler.loadLabels(sequenz);
-    cv::namedWindow("Reaction Game", 1);
+    gui.createWindow("Reaction Game");
 
     gui.pushToTop("Reaction Game");
 

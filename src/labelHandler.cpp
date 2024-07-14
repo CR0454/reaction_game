@@ -9,7 +9,7 @@
 
 int labelHandler::loadLabels(std::string sequence) {
 
-    std::string path = "../label_02/" + sequence + ".txt";        //path to sequence label file
+    std::string path = "../label_02/" + sequence + ".txt";        //generate path to sequence label file
     std::ifstream file(path);
     if(!file.is_open()) {
         std::cerr << "Could not open label file: " << path << std::endl;
@@ -41,7 +41,7 @@ int labelHandler::loadLabels(std::string sequence) {
             std::cerr << "Error reading line: " << line << std::endl;
         }
     }
-    std::cout << "Read " << m_labels.size() << " labels from file \"" << path << "\"\n";
+    std::cout << "Successfully read " << m_labels.size() << " labels from file \"" << path << "\"\n";
 
     return 0;
 
@@ -66,6 +66,7 @@ std::vector<int> labelHandler::getBoxPosition(Label label) {
     boxPosition.push_back(label.m_bbox.y);
     boxPosition.push_back(label.m_bbox.x + label.m_bbox.width);
     boxPosition.push_back(label.m_bbox.y + label.m_bbox.height);
+    //Add upper left and lower right corner coordinates to vector
 
     return boxPosition;
 }

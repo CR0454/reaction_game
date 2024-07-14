@@ -15,11 +15,10 @@ public:
     Label(int frame, const std::string &type, const cv::Rect &bbox)
             : m_frame(frame), m_type(type), m_bbox(bbox) {}
 
-    void drawLabel(cv::Mat);
 
-    int m_frame;            //Frame number, where the bounding box corresponds to
-    std::string m_type;     //Class of the bounding box (e.g. Pedestrian, Car, Cyclist) --> DontCare should be ignored
-    cv::Rect m_bbox;
+    const int m_frame;            //Frame number, where the bounding box corresponds to
+    const std::string m_type;     //Class of the bounding box (e.g. Pedestrian, Car, Cyclist)
+    const cv::Rect m_bbox;
 };
 
 

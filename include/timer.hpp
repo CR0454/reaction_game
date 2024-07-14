@@ -16,10 +16,10 @@ public:
 
     double getTimer();      //Return time since start in seconds
 
-    bool timeGreater(double);       //Check if the time since start is greater than input seconds
+    bool timeGreater(double limit);       //Check if the time since start is greater than input seconds
 
 private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_start;
+    std::chrono::time_point<std::chrono::high_resolution_clock> m_start;        //Start point for the timer
 };
 
 

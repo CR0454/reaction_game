@@ -11,9 +11,9 @@ class labelHandler {
 public:
     labelHandler() {}
 
-    int loadLabels(std::string sequence);           //Load all Labels for the selected sequence without "DontCare"
+    int loadLabels(std::string sequence);           //Load all Labels for the selected sequence, ignoring "DontCare"
 
-    std::vector<Label> getFrameLabels(int frame);        //Return all Labels associated with the input image
+    std::vector<Label> getFrameLabels(int frame);        //Return all Labels associated with the input frame
 
     std::vector<int> getBoxPosition(Label label);     //Return position of label
 

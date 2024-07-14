@@ -7,30 +7,31 @@
 #include <fstream>
 
 void Gui::createWindow(std::string winName) {
-    cv::namedWindow(winName, 1);
+    cv::namedWindow(winName, 1);        //Create a window with the input name
 }
 
 void Gui::pushToTop(std::string winName) {
-    cv::setWindowProperty(winName, cv::WND_PROP_TOPMOST, 1);
-    cv::setWindowProperty(winName, cv::WND_PROP_TOPMOST, 0);
+    cv::setWindowProperty(winName, cv::WND_PROP_TOPMOST, 1);        //Set window to "topmost" to appear above all other windows
+    cv::setWindowProperty(winName, cv::WND_PROP_TOPMOST, 0);        //Deactivate "topmost" to be able to open other windows above game
 }
 
 void Gui::refreshWindow(std::string winName, cv::Mat img) {
-    cv::imshow(winName, img);
-    cv::waitKey(10);
+    cv::imshow(winName, img);               //Display image with all additionally drawn boxes in window
+    cv::waitKey(1);
 }
 
 cv::Mat Gui::nextImage() {
-    cv::Mat image = cv::imread(getPath());
+    m_imageN++;         //Current image in sequence increased by 1 to get the next image
+    cv::Mat image = cv::imread(getPath());      //Load the image
 
     if (image.empty()) {                                    //Check if image was loaded correctly
         std::cerr << "Error: Could not open or find the image!" << std::endl;
     }
-    m_imageN++;                     //"Current" image in sequence increased by 1 in preparation for next function call
+
     return image;
 }
 
-std::string Gui::getPath() {
+std::string const Gui::getPath() {
     std::string path = "../training/image_02/";     //Default folder layout for every image sequence
     path += m_sequence + "/";                       //Sequence specific folder name
 
@@ -60,5 +61,5 @@ void Gui::drawBox(Label label, cv::Mat image, int r, int g, int b) {
 }
 
 int Gui::getImageN() {
-    return m_imageN-1;          //-1 to account for
+    return m_imageN;
 }
