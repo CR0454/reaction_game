@@ -22,7 +22,7 @@ using namespace std;
 
 class Gamemode {
 public:
-    Gamemode(int count, string sequence) : count(count), sequenz(sequence), score(0) {} // constructor
+    Gamemode(int count, string sequence) : count(count), sequence(sequence), score(0) {} // constructor
 
     virtual double run(); // start game and return double score
 

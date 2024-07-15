@@ -18,7 +18,7 @@ double Gamemode_2::run() {
     Gui gui(sequence);
     Timer timer;
 
-    labelHandler.loadLabels(sequenz); //load labels
+    labelHandler.loadLabels(sequence); //load labels
 
     gui.createWindow(windowName); // create window
     gui.pushToTop(windowName); // will focus the window to the front

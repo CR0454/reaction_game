@@ -84,13 +84,13 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
                 // if player clicked correct, print and add the time it took to click to the score
                 score += timer.getTimer();
-                printf("Correct click, time: %f\nCurrent avg. Time: %f\n", timer.getTimer()), getScore(gui->getImageN());
+                printf("Correct click, time: %f\nCurrent avg. Time: %f\n", timer.getTimer(), getScore(gui->getImageN()));
             }
             else { // enter if player clicked wrong
 
                 // if player clicked wrong, print and add penalty + the time it took to click to the score
                 score += (timer.getTimer() + penalty);
-                printf("Incorrect click, time: %f plus %d sek punishment\nCurrent avg. Time: %f\n", timer.getTimer(), penalty), getScore(gui->getImageN());
+                printf("Incorrect click, time: %f plus %d sek punishment\nCurrent avg. Time: %f\n", timer.getTimer(), penalty, getScore(gui->getImageN()));
             }
             //set player as not afk (so if won´t be true) and break loop
             personAfk = 0;
