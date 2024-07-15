@@ -10,11 +10,12 @@ void Gamehandler::start() {
     Gamemode* gamemode;
 
     menu.setName();
-    menu.setN();
+    menu.setRounds();
     menu.setSequence();
+    menu.setMode();
 
     std::cout << "Current highscore is " << highscore.getHighscore() << std::endl;
 
-    gamemode = new Gamemode_1(menu.getN(), menu.getSequence());
+    gamemode = new Gamemode_1(menu.getRounds(), menu.getSequence());
     highscore.setHighscore(gamemode -> run());
 }

@@ -1,9 +1,11 @@
 #include <iostream>
 #include "../include/menu.hpp"
+#include <regex>
 
 void Menu::setN() //keine Parameter, da die Werte direkt eingelesen werden in der Funktion
 {
     int x;
+
     while(true) {
         std::cout << "How many rounds would you like to play? \n";
         std::cin >> x; //directly read in from the console

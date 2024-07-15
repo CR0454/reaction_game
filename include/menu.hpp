@@ -9,15 +9,18 @@ dbbdh
 class Menu
 {
     public:
-    void setN();
-    int getN();
+    void setRounds();
+    int getRounds();
     void setSequence();
     std::string getSequence();
     void setName();
     std::string getName();
+    void setMode();
+    int getMode();
     private:
-    std::string name;
-    int n;
-    std::string sequence;
+    std::string m_name;
+    int m_rounds;
+    std::string m_sequence;
+    int m_gamemode;
 
 };
