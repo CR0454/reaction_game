@@ -4,27 +4,44 @@
 
 #ifndef KLASSENDIAGRAMM_DRAWIO_GAMEMODE_H
 #define KLASSENDIAGRAMM_DRAWIO_GAMEMODE_H
-#include <iostream>
-#include "label.hpp"
+
+//Include all necessary class files for all game modes
 #include "labelHandler.hpp"
 #include "gui.hpp"
 #include "timer.hpp"
 #include "clickHandler.hpp"
+
+//Include all necessary libraries for all game modes
+#include <iostream>
+#include <random>
+#include <chrono>
+#include <thread>
+
+//define namespace std so we don't have to write std:: before every function in all game modes
 using namespace std;
 
 class Gamemode {
 public:
     Gamemode(int count, string sequenz) : count(count), sequenz(sequenz), score(0) {} // construktor
-    ~Gamemode(); // destruktor
 
-    virtual double run(); // strat game and return avg. time
+    virtual double run(); // strat game and return double score
 
 protected:
-    Label randomLabel(vector<Label> labels); // return random label
+    // protected functions
+    void clickResult(Label labelToClick, cv::Mat image, Gui *gui); // print result of click and add time to score
+    double getScore(); // return score
+    Label randomLabel(vector <Label> labels); // return random label from given vector
     bool compareClick(Label labelToClick, clickHandler *clickhandler); // checks if click is in box
+
+    // protected input variables
     double score; // average time to click
     int count; // count of rounds to play
-    string sequenz; // sequenz of images
+    string sequenz; // wich sequenz of images to play
+
+    // protected const variables for game settings
+    const string windowName = "Reaction Game"; // name of the window
+    const int penalty = 5; // penalty for wrong click and afk(2*penalty)
+    const int afkTime = 3; // after this time the player is afk
 };
 
 

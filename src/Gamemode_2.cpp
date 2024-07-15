@@ -3,12 +3,14 @@
 //
 
 #include "../include/Gamemode_2.h"
-#include <random>
-#include <chrono>
-#include <thread>
 
-Gamemode_2::~Gamemode_2() {
+void Gamemode_2::waitRandomTime(int minimumMiliseconds, int maximumMiliseconds) {
 
+    unsigned seed = chrono::steady_clock::now().time_since_epoch().count();
+    mt19937 rng(seed);
+    uniform_int_distribution<int> distribution(minimumMiliseconds, maximumMiliseconds);
+    int randomMilliseconds = distribution(rng);
+    this_thread::sleep_for(chrono::milliseconds(randomMilliseconds));
 }
 
 double Gamemode_2::run() {
@@ -18,54 +20,30 @@ double Gamemode_2::run() {
 
     labelhandler.loadLabels(sequenz);
 
-    gui.createWindow("Reaction Game");
-    gui.pushToTop("Reaction Game");
+    gui.createWindow(windowName);
+    gui.pushToTop(windowName);
 
     for (int i = 0; i < count; ++i) {
 
         cv::Mat image = gui.nextImage();
 
-        std::vector<Label> labels_of_image = labelhandler.getFrameLabels(gui.getImageN());
+        vector <Label> labels_of_image = labelhandler.getFrameLabels(gui.getImageN());
 
         Label random_label = randomLabel(labels_of_image);
 
-        gui.refreshWindow("Reaction Game", image);
+        gui.refreshWindow(windowName, image);
 
-        for(int i = 0; i < labels_of_image.size(); i++) {
+        for (int i = 0; i < labels_of_image.size(); i++) {
             gui.drawBox(labels_of_image[i], image, 0, 0, 255);
         }
 
+        gui.refreshWindow(windowName, image);
+
         gui.drawBox(random_label, image, 255, 0, 0);
 
-        unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count();
-        std::mt19937 rng(seed);
-        std::uniform_int_distribution<int> distribution(1000, 2000);
-        int randomMilliseconds = distribution(rng);
-        std::this_thread::sleep_for(std::chrono::milliseconds(randomMilliseconds));
+        waitRandomTime(1000, 2000);
 
-
-        gui.refreshWindow("Reaction Game", image);
-
-        timer.setTimer();
-
-        clickHandler clickhandler;
-        clickhandler.primeMouseClick("Reaction Game");
-
-        while (!timer.timeGreater(5)) {
-            gui.refreshWindow("Reaction Game", image);
-            if(clickhandler.checkClick()) {
-                if (compareClick(random_label, &clickhandler)) {
-                    score += timer.getTimer();
-                    printf("Correct click\n, time: %f\n", timer.getTimer());
-                } else {
-                    score += (timer.getTimer() + 5);
-                    printf("Incorrect click\n, time: %f \nplus 5sek punishment\n", timer.getTimer());
-                }
-                break;
-            }
-            this_thread::sleep_for(chrono::milliseconds(16));
-
-        }
+        clickResult(random_label, image, &gui);
     }
-    return score / count;
+    return getScore();
 }

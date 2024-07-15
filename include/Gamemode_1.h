@@ -10,7 +10,7 @@
 class Gamemode_1 : public Gamemode {
 public:
     Gamemode_1(int count, string sequenz) : Gamemode(count, sequenz) {}
-    ~Gamemode_1();
+
     double run() override;
 
 };

@@ -3,24 +3,16 @@
 //
 
 #include "../include/Gamemode.h"
-#include "../include/clickhandler.hpp"
-#include <iostream>
-#include <random>
-#include <chrono>
-
-
-using namespace std;
-
-
-Gamemode::~Gamemode() {
-
-}
 
 double Gamemode::run() {
     return 0;
 }
 
-Label Gamemode::randomLabel(vector<Label> labels) {
+double Gamemode::getScore() {
+    return score / count;
+}
+
+Label Gamemode::randomLabel(vector <Label> labels) {
     labelHandler labelhandler;
 
     unsigned seed = chrono::steady_clock::now().time_since_epoch().count();
@@ -36,7 +28,7 @@ Label Gamemode::randomLabel(vector<Label> labels) {
 bool Gamemode::compareClick(Label labelToClick, clickHandler *clickH) {
     labelHandler labelhandler;
 
-    vector<int> clickPosition = clickH -> getPosition();
+    vector<int> clickPosition = clickH->getPosition();
     if (clickPosition[0] == -1 || clickPosition[1] == -1) {
         printf("No click found\n");
         return false;
@@ -59,4 +51,40 @@ bool Gamemode::compareClick(Label labelToClick, clickHandler *clickH) {
     } else {
         return false;
     }
+}
+
+void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
+
+    clickHandler clickhandler;
+    Timer timer;
+
+    bool personAfk = 1; // set player as afk until proven otherwise
+
+    clickhandler.primeMouseClick(windowName);
+
+    gui.refreshWindow(windowName, image);
+
+    timer.setTimer();
+
+    while (!timer.timeGreater(afkTime)) {
+        gui.refreshWindow(windowName, image);
+        if (clickhandler.checkClick()) {
+            if (compareClick(labelToClick, &clickhandler)) {
+                score += timer.getTimer();
+                printf("Correct click, time: %f\nCurrent avg. time: %f\n", timer.getTimer(), getScore());
+            } else {
+                score += (timer.getTimer() + penalty);
+                printf("Incorrect click, time: %f plus %d sek punishment\nCurrent avg. time: %f\n"
+                       , timer.getTimer(), penalty, getScore());
+            }
+            personAfk = 0;
+            break;
+        }
+        this_thread::sleep_for(chrono::milliseconds(16)); // limit to 60 fps for performance reasons
+    }
+
+    if personAfk{
+                score += (2 * penalty);
+                printf("You´re too slow or AFK, %d sek punishment\nCurrent avg. time: %f\n", (2*penalty), getScore());
+        }
 }
