@@ -1,4 +1,6 @@
 #include <iostream>
+#ifndef MENU_HPP_INCLUDED
+#define MENU_HPP_INCLUDED
 
 enum class Sequence
 {
@@ -18,9 +20,11 @@ class Menu
     void setMode();
     int getMode();
     private:
-    std::string m_name;
+    const std::string m_name;
     int m_rounds;
     std::string m_sequence;
     int m_gamemode;
 
 };
+
+#endif //MENU_HPP_INCLUDED

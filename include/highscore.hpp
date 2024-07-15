@@ -1,17 +1,17 @@
 #include <iostream>
 #include <fstream>
-#ifndef HIGHSCORE_CPP_INCLUDED
-#define HIGHSCORE_CPP_INCLUDED
+#ifndef HIGHSCORE_HPP_INCLUDED
+#define HIGHSCORE_HPP_INCLUDED
 
 class Highscore
 {
     public:
     double getHighscore();
-    void setHighscore(double x);
+    void setHighscore(double value);
 
     private:
     double highscore;
 
 };
 
-#endif //HIGHSCORE_CPP_INCLUDED
+#endif //HIGHSCORE_HPP_INCLUDED

@@ -9,30 +9,30 @@ double Highscore::getHighscore()
     std::string output1;
     if(fread1) {
         while (std::getline(fread1, output1)) {
-            highscore = std::stod(output1); //converts the output string to a double
+            highscore = std::stod(output1); // line is read in as a string and afterwards converted to a double with stod
         }
         fread1.close();
         return highscore;
     }
     else{
-        std::ofstream fread1("../highscore.txt");
+        std::ofstream fread1("../highscore.txt"); //creates a file if it does not exist yet
         return 0;
     }
 }
 
-void Highscore::setHighscore(double x) {
+void Highscore::setHighscore(double value) {
     std::ifstream fread("../highscore.txt");
     std::string output;
     double score;
     if (fread) {
         while (std::getline(fread, output)) {
-            score = std::stod(output); // Zeile wird als string eingelesen und dann zu double konvertiert mit stod
+            score = std::stod(output);
         }
         fread.close();
-        if (x < score || x == 0) {
-            std::ofstream highscorefile; //Ausgabestreamobjekt definieren
+        if (value < score || value == 0) {
+            std::ofstream highscorefile; //defines output stream object
             highscorefile.open("../highscore.txt", std::ofstream::ate);
-            highscorefile << x;
+            highscorefile << value;
             highscorefile.close();
         } else {
             std::cout << "Did not reach a new Highscore";
@@ -40,7 +40,7 @@ void Highscore::setHighscore(double x) {
     } else {
         std::ofstream fread;
         fread.open("../highscore.txt", std::ofstream::ate);
-        fread << x;
+        fread << value;
         fread.close();
         std::cout << "There are no highscores stored yet, you are the first person to play this game";
     }
