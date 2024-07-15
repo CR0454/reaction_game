@@ -62,12 +62,12 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
     clickhandler.primeMouseClick(windowName);
 
-    gui.refreshWindow(windowName, image);
+    gui->refreshWindow(windowName, image);
 
     timer.setTimer();
 
     while (!timer.timeGreater(afkTime)) {
-        gui.refreshWindow(windowName, image);
+        gui->refreshWindow(windowName, image);
         if (clickhandler.checkClick()) {
             if (compareClick(labelToClick, &clickhandler)) {
                 score += timer.getTimer();
@@ -83,7 +83,7 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
         this_thread::sleep_for(chrono::milliseconds(16)); // limit to 60 fps for performance reasons
     }
 
-    if personAfk{
+    if (personAfk){
                 score += (2 * penalty);
                 printf("You´re too slow or AFK, %d sek punishment\nCurrent avg. time: %f\n", (2*penalty), getScore());
         }
