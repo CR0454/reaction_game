@@ -16,6 +16,12 @@ void Gamehandler::start() {
 
     std::cout << "Current highscore is " << highscore.getHighscore() << std::endl;
 
-    gamemode = new Gamemode_1(menu.getRounds(), menu.getSequence());
-    highscore.setHighscore(gamemode -> run());
+    if(menu.getMode() == 1){
+        gamemode = new Gamemode_1(menu.getRounds(), menu.getSequence());
+        highscore.setHighscore(gamemode -> run());
+    }
+    else{
+        gamemode = new Gamemode_2(menu.getRounds(), menu.getSequence());
+        highscore.setHighscore(gamemode -> run());
+    }
 }

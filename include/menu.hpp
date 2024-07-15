@@ -2,15 +2,11 @@
 #ifndef MENU_HPP_INCLUDED
 #define MENU_HPP_INCLUDED
 
-enum class Sequence
-{
-spielhjdbhjev,
-dbbdh
-};
-
 class Menu
 {
     public:
+    Menu();
+    ~Menu();
     void setRounds();
     int getRounds();
     void setSequence();
@@ -19,8 +15,9 @@ class Menu
     std::string getName();
     void setMode();
     int getMode();
+
     private:
-    const std::string m_name;
+    std::string m_name;
     int m_rounds;
     std::string m_sequence;
     int m_gamemode;

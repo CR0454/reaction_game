@@ -6,11 +6,13 @@
 class Highscore
 {
     public:
+    Highscore();
+    ~Highscore();
     double getHighscore();
     void setHighscore(double value);
 
     private:
-    double highscore;
+    const double highscore;
 
 };
 

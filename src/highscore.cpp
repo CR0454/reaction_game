@@ -2,6 +2,12 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
+Highscore::Highscore(){
+};
+Highscore::~Highscore(){
+};
+
 double Highscore::getHighscore()
 {
     double highscore;
