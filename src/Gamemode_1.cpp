@@ -5,23 +5,25 @@
 #include "../include/Gamemode_1.h"
 
 double Gamemode_1::run() {
-    labelHandler labelhandler;
-    Gui gui(sequenz);
+    labelHandler labelHandler;
+    Gui gui(sequence);
 
-    labelhandler.loadLabels(sequenz);
-    gui.createWindow(windowName);
+    labelHandler.loadLabels(sequenz); //load labels
 
-    gui.pushToTop(windowName);
+    gui.createWindow(windowName); // create window
+    gui.pushToTop(windowName); // will focus the window to the front
 
     for (int i = 0; i < count; ++i) {
 
-        cv::Mat image = gui.nextImage();
+        cv::Mat image = gui.nextImage(); //load next image of sequence
 
-        Label random_label = randomLabel(labelhandler.getFrameLabels(gui.getImageN()));
+        vector <Label> labels_of_image = labelHandler.getFrameLabels(gui.getImageN()); //get labels of image
 
-        gui.drawBox(random_label, image, 255, 0, 0);
+        Label random_label = randomLabel(labels_of_image); // choose random label
+
+        gui.drawBox(random_label, image, 255, 0, 0); //draw red box around random label
 
         clickResult(random_label, image, &gui);
     }
-    return getScore();
+    return getScore(count); //return final score
 }

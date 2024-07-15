@@ -5,47 +5,56 @@
 #include "../include/Gamemode.h"
 
 double Gamemode::run() {
-    return 0;
+    return -1;
 }
 
-double Gamemode::getScore() {
-    return score / count;
+double Gamemode::getScore(int currentFrame) {
+    return score / currentFrame;
 }
 
 Label Gamemode::randomLabel(vector <Label> labels) {
-    labelHandler labelhandler;
+    labelHandler labelHandler;
 
-    unsigned seed = chrono::steady_clock::now().time_since_epoch().count();
-    mt19937 rng(seed);
-    uniform_int_distribution<int> distribution(0, labels.size() - 1);
 
-    int randomIndex = distribution(rng);
+    unsigned seed = chrono::steady_clock::now().time_since_epoch().count(); //set seed for random number generator to current time
+    mt19937 rng(seed); //initialize random number generator
+    uniform_int_distribution<int> distribution(0, labels.size() - 1); //initialize distribution for random number generator
 
-    Label randomLabel = labels[randomIndex];
-    return randomLabel;
+    int randomIndex = distribution(rng); //get random number
+
+    return labels[randomIndex];
 }
 
 bool Gamemode::compareClick(Label labelToClick, clickHandler *clickH) {
-    labelHandler labelhandler;
+    labelHandler labelHandler;
 
+    // get click position
     vector<int> clickPosition = clickH->getPosition();
+
+    // exception handling if no click is found
     if (clickPosition[0] == -1 || clickPosition[1] == -1) {
         printf("No click found\n");
         return false;
     }
+    // convert click position to variables, so it is easier to read
     int click_x = clickPosition[0];
     int click_y = clickPosition[1];
 
-    vector<int> boxPosition = labelhandler.getBoxPosition(labelToClick);
+    // get box position of label to click
+    vector<int> boxPosition = labelHandler.getBoxPosition(labelToClick);
+
+    // exception handling if no box is found
     if (boxPosition[0] == -1 || boxPosition[1] == -1 || boxPosition[2] == -1 || boxPosition[3] == -1) {
         printf("No box found\n");
         return false;
     }
+    // convert box position to variables, so it is easier to read
     int box_start_x = boxPosition[0];
     int box_start_y = boxPosition[1];
     int box_end_x = boxPosition[2];
     int box_end_y = boxPosition[3];
 
+    // check if click is in box
     if (click_x >= box_start_x && click_x <= box_end_x && click_y >= box_start_y && click_y <= box_end_y) {
         return true;
     } else {
@@ -55,28 +64,35 @@ bool Gamemode::compareClick(Label labelToClick, clickHandler *clickH) {
 
 void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
-    clickHandler clickhandler;
+    clickHandler clickHandler;
     Timer timer;
 
     bool personAfk = 1; // set player as afk until proven otherwise
 
-    clickhandler.primeMouseClick(windowName);
+    clickHandler.primeMouseClick(windowName); // prime click so it can be detected
 
-    gui->refreshWindow(windowName, image);
+    gui->refreshWindow(windowName, image); // refresh image for new frame and boxes
 
-    timer.setTimer();
+    timer.setTimer(); // start timer
 
     while (!timer.timeGreater(afkTime)) {
-        gui->refreshWindow(windowName, image);
-        if (clickhandler.checkClick()) {
-            if (compareClick(labelToClick, &clickhandler)) {
+
+        gui->refreshWindow(windowName, image); // refresh window so window doesn't freeze
+
+        if (clickHandler.checkClick()) { //enter if player clicked
+            if (compareClick(labelToClick, &clickHandler)) { //enter if player clicked correct
+
+                // if player clicked correct, print and add the time it took to click to the score
                 score += timer.getTimer();
-                printf("Correct click, time: %f\nCurrent avg. time: %f\n", timer.getTimer(), getScore());
-            } else {
-                score += (timer.getTimer() + penalty);
-                printf("Incorrect click, time: %f plus %d sek punishment\nCurrent avg. time: %f\n"
-                       , timer.getTimer(), penalty, getScore());
+                printf("Correct click, time: %f\nCurrent avg. Time: %f\n", timer.getTimer()), getScore(gui->getImageN());
             }
+            else { // enter if player clicked wrong
+
+                // if player clicked wrong, print and add penalty + the time it took to click to the score
+                score += (timer.getTimer() + penalty);
+                printf("Incorrect click, time: %f plus %d sek punishment\nCurrent avg. Time: %f\n", timer.getTimer(), penalty), getScore(gui->getImageN());
+            }
+            //set player as not afk (so if won´t be true) and break loop
             personAfk = 0;
             break;
         }
@@ -84,7 +100,8 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
     }
 
     if (personAfk){
-                score += (2 * penalty);
-                printf("You´re too slow or AFK, %d sek punishment\nCurrent avg. time: %f\n", (2*penalty), getScore());
-        }
+        // if player is afk or too slow, print and add penalty to the score
+        score += (2 * penalty);
+        printf("You´re too slow or AFK, %d sek punishment\nCurrent avg. Time: %f\n", (2*penalty), getScore(gui->getImageN()));
+    }
 }

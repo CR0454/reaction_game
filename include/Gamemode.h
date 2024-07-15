@@ -17,26 +17,26 @@
 #include <chrono>
 #include <thread>
 
-//define namespace std so we don't have to write std:: before every function in all game modes
+//define namespace std, so we don't have to write std:: before every function in all game modes
 using namespace std;
 
 class Gamemode {
 public:
-    Gamemode(int count, string sequenz) : count(count), sequenz(sequenz), score(0) {} // construktor
+    Gamemode(int count, string sequence) : count(count), sequenz(sequence), score(0) {} // constructor
 
-    virtual double run(); // strat game and return double score
+    virtual double run(); // start game and return double score
 
 protected:
     // protected functions
     void clickResult(Label labelToClick, cv::Mat image, Gui *gui); // print result of click and add time to score
-    double getScore(); // return score
+    double getScore(int currentFrame); // return score at current frame
     Label randomLabel(vector <Label> labels); // return random label from given vector
-    bool compareClick(Label labelToClick, clickHandler *clickhandler); // checks if click is in box
+    bool compareClick(Label labelToClick, clickHandler *clickHandler); // checks if click is in box
 
     // protected input variables
     double score; // average time to click
     int count; // count of rounds to play
-    string sequenz; // wich sequenz of images to play
+    string sequence; // which sequence of images to play
 
     // protected const variables for game settings
     const string windowName = "Reaction Game"; // name of the window

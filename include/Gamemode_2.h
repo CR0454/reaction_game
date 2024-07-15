@@ -9,12 +9,12 @@
 
 class Gamemode_2 : public Gamemode {
 public:
-    Gamemode_2(int count, string sequenz) : Gamemode(count, sequenz) {}
+    Gamemode_2(int count, string sequence) : Gamemode(count, sequence) {} // constructor
 
-    double run() override;
+    double run() override; // run will start the game and return the score
 
 private:
-    void waitRandomTime(int minimumMiliseconds, int maximumMiliseconds);
+    void waitRandomTime(int minimumMilliseconds, int maximumMilliseconds); // wait random time between minimum and maximum milliseconds
 };
 
 #endif //KLASSENDIAGRAMM_DRAWIO_GAMEMODE_2_H
