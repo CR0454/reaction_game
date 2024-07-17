@@ -19,6 +19,10 @@ bool Highscore::deleteContent(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::ofstream fdeleteContent("../highscore.txt", std::ios::trunc);
             return 1;
+        } else if (decision == "no") {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            std::cout<< "Please clear the file to play the game.\n";
+            return 0;
 
         } else {
             std::cin.clear(); //deletes error
@@ -42,11 +46,10 @@ double Highscore::getHighscore() {
                 highscore = std::stod(output);
             }
             catch (const std::invalid_argument) {
-                deleteContent();
                 if (deleteContent() == 1) {
                     highscore = 0; // line is read in as a string and afterwards converted to a double with stod
                     break;
-                }else {
+                } else {
                     break;
                 }
             }
