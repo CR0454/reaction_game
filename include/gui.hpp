@@ -15,15 +15,15 @@ public:
         m_sequence(sequence)
         {}
 
-    void createWindow(std::string winName);     //Create a window for all other GUI elements to take part in
+    void createWindow(std::string winName);     //Create a window for all other GUI elements to use
 
-    void pushToTop(std::string winName);        //Used to push window atop all other windows at the start of game
+    void pushToTop(std::string winName);        //Used to push window on top of all other windows at the start of game
 
-    void refreshWindow(std::string winName, cv::Mat image);     //
+    void refreshWindow(std::string winName, cv::Mat image);     //refresh the window with the given image
 
-    cv::Mat nextImage();                //Load the next image in the sequence
+    cv::Mat nextImage();                //Load and return the next image in the sequence
 
-    void drawBox(Label label, cv::Mat image, int r, int g, int b);        //Draws the specified label on the currently shown image
+    void drawBox(Label label, cv::Mat image, int r, int g, int b);        //Draw the specified label on the given image
 
     int getImageN();                    //Return the current frame number
 
@@ -32,7 +32,6 @@ private:
 
     int m_imageN;               //Image number in sequence
     const std::string m_sequence;     //Used image sequence
-
 
 };
 

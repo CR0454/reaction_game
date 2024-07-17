@@ -10,7 +10,7 @@
 
 class clickHandler {
 public:
-    clickHandler(): clickx(-1), clicky(-1), clickBool(false) {}     //Constructor, set clickx & clicky to an error state
+    clickHandler(): clickx(-1), clicky(-1), clickBool(false) {}     //Constructor, set clickx & clicky to a default error state
 
     void primeMouseClick(std::string windowName);       //Set up the mouse callback function
 

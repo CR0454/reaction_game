@@ -11,7 +11,7 @@
 
 class Label {
 public:
-    Label() : m_frame(-1), m_type(""), m_bbox(cv::Rect()) {}
+    Label() : m_frame(-1), m_type(""), m_bbox(cv::Rect()) {}        //Default constructor defining m_frame as exception state '-1'
     Label(int frame, const std::string &type, const cv::Rect &bbox)
             : m_frame(frame), m_type(type), m_bbox(bbox) {}
 
