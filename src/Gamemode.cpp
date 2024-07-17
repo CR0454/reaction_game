@@ -70,7 +70,7 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
     gui->refreshWindow(windowName, image); // refresh image for new frame and boxes
 
-    timer.setTimer(); // start timer
+    timer.setTimer();
 
     while (!timer.timeGreater(afkTime)) {
 
