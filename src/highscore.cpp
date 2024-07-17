@@ -19,10 +19,6 @@ bool Highscore::deleteContent(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::ofstream fdeleteContent("../highscore.txt", std::ios::trunc);
             return 1;
-        } else if (decision == "no") {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::cout<< "The content of the file is not deleted. If you want to play the game please delete the content and restart the game.\n";
-            return 0;
 
         } else {
             std::cin.clear(); //deletes error
@@ -40,7 +36,6 @@ double Highscore::getHighscore() {
     double highscore;
     std::ifstream fread("../highscore.txt"); //reads file
     std::string output;
-    std::regex onlyDouble("(^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$)");
     if (fread) {
         while (std::getline(fread, output)) {
             try {
@@ -50,7 +45,8 @@ double Highscore::getHighscore() {
                 deleteContent();
                 if (deleteContent() == 1) {
                     highscore = 0; // line is read in as a string and afterwards converted to a double with stod
-                } else {
+                    break;
+                }else {
                     break;
                 }
             }
