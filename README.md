@@ -20,3 +20,4 @@ Das Spiel besteht aus mehreren Klassen, die verschiedene Aspekte des Spiels verw
 | `labelHandler` | Verwaltet die Labels, die für das Spiel benötigt werden.                                                                                                  |
 | `Label`        | Repräsentiert ein einzelnes Label im Spiel.                                                                                                               |
 
+
