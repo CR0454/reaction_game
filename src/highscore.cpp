@@ -22,7 +22,6 @@ bool Highscore::deleteContent(){
         } else if (decision == "no") {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::cout<< "Please clear the file to play the game.\n";
-            return 0;
 
         } else {
             std::cin.clear(); //deletes error
