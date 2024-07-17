@@ -4,7 +4,7 @@
 
 #include "../include/Gamemode_1.h"
 
-double Gamemode_1::run() {
+vector<double> Gamemode_1::run() {
     labelHandler labelHandler;
     Gui gui(sequence);
 
@@ -19,11 +19,19 @@ double Gamemode_1::run() {
 
         vector <Label> labels_of_image = labelHandler.getFrameLabels(gui.getImageN()); //get labels of image
 
-        Label random_label = randomLabel(labels_of_image); // choose random label
+        //check if there are labels in the image
+        if (labels_of_image.empty()) {
+            i--;
+        }
+        else{
 
-        gui.drawBox(random_label, image, 255, 0, 0); //draw red box around random label
+            Label random_label = randomLabel(labels_of_image); // choose random label
 
-        clickResult(random_label, image, &gui);
+            gui.drawBox(random_label, image, 255, 0, 0); //draw red box around random label
+
+            clickResult(random_label, image, &gui);
+        }
+
     }
     return score; //return final score vector
 }

@@ -81,13 +81,13 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
                 // if player clicked correct, print and add the time it took to click to the score
                 score.push_back(timer.getTimer());
-                printf("Correct click, time: %f\n", timer.getTimer());
+                printf("Correct click, time: %fs\n", timer.getTimer());
             }
             else { // enter if player clicked wrong
 
                 // if player clicked wrong, print and add penalty + the time it took to click to the score
                 score.push_back(timer.getTimer() + penalty);
-                printf("Incorrect click, time: %f plus %d sek punishment\n", timer.getTimer(), penalty);
+                printf("Incorrect click, time: %fs + %ds punishment\n", timer.getTimer(), penalty);
             }
             //set player as not afk (so if won´t be true) and break loop
             personAfk = 0;
@@ -99,6 +99,6 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
     if (personAfk){
         // if player is afk or too slow, print and add penalty to the score
         score.push_back(2*penalty);
-        printf("You´re too slow or AFK, %d sek punishment\n", (2*penalty));
+        printf("You´re too slow or AFK, %ds punishment\n", (2*penalty));
     }
 }
