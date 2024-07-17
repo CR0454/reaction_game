@@ -72,7 +72,7 @@ void Highscore::setHighscore(double value) {
             score = std::stod(output);
         }
         fread.close();
-        if (value < score || value == 0) {
+        if (value < score || value == 0 || output == "")  {
             std::ofstream highscorefile; //defines output stream object
             highscorefile.open("../highscore.txt", std::ofstream::ate);
             highscorefile << value;
