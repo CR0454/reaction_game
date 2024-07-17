@@ -31,7 +31,7 @@ vector<double> Gamemode_2::run() {
         vector <Label> labels_of_image = labelHandler.getFrameLabels(gui.getImageN()); //get labels of image
 
         //check if there are labels in the image
-        if (labels_of_image.empty()) {
+        if (labels_of_image.size() < 2) {
             i--;
         } else {
 
