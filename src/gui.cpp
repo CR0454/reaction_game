@@ -22,11 +22,15 @@ void Gui::refreshWindow(std::string winName, cv::Mat img) {
 
 cv::Mat Gui::nextImage() {
     m_imageN++;         //Current image in sequence increased by 1 to get the next image
-    cv::Mat image = cv::imread(getPath());      //Load the image
 
-    if (image.empty()) {                                    //Check if image was loaded correctly
-        std::cerr << "Error: Could not open or find the image!" << std::endl;
+    if(!std::ifstream(getPath()).good()) {
+        m_imageN++;
+        if (std::ifstream(getPath()).good()) {
+            std::cerr << "Error, could not find the image!" << std::endl;
+        }
+        m_imageN = 0;
     }
+    cv::Mat image = cv::imread(getPath());      //Load the image
 
     return image;
 }
