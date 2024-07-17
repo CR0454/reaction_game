@@ -11,7 +11,7 @@ class Gamemode_1 : public Gamemode {
 public:
     Gamemode_1(int count, string sequence) : Gamemode(count, sequence) {}  // constructor
 
-    double run() override; // run will start the game and return the score
+    vector<double> run() override; // run will start the game and return the score
 
 };
 

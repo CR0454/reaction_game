@@ -24,7 +24,7 @@ class Gamemode {
 public:
     Gamemode(int count, string sequence) : count(count), sequence(sequence), score(0) {} // constructor
 
-    virtual double run(); // start game and return double score
+    virtual vector<double> run(); // start game and return double score
 
 protected:
     // protected functions
@@ -34,7 +34,7 @@ protected:
     bool compareClick(Label labelToClick, clickHandler *clickHandler); // checks if click is in box
 
     // protected input variables
-    double score; // average time to click
+    vector<double> score; // average time to click
     int count; // count of rounds to play
     string sequence; // which sequence of images to play
 

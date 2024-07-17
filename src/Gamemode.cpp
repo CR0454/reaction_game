@@ -4,12 +4,9 @@
 
 #include "../include/Gamemode.h"
 
-double Gamemode::run() {
-    return -1;
-}
-
-double Gamemode::getScore(int currentFrame) {
-    return score / currentFrame;
+vector<double> Gamemode::run() {
+    score.push_back(-1); // add -1 to score vector for exception handling
+    return score;
 }
 
 Label Gamemode::randomLabel(vector <Label> labels) {
@@ -73,7 +70,7 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
     gui->refreshWindow(windowName, image); // refresh image for new frame and boxes
 
-    timer.setTimer(); // start timer
+    timer.setTimer();
 
     while (!timer.timeGreater(afkTime)) {
 
@@ -83,14 +80,14 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
             if (compareClick(labelToClick, &clickHandler)) { //enter if player clicked correct
 
                 // if player clicked correct, print and add the time it took to click to the score
-                score += timer.getTimer();
-                printf("Correct click, time: %f\nCurrent avg. Time: %f\n", timer.getTimer(), getScore(gui->getImageN()));
+                score.push_back(timer.getTimer());
+                printf("Correct click, time: %f\n", timer.getTimer());
             }
             else { // enter if player clicked wrong
 
                 // if player clicked wrong, print and add penalty + the time it took to click to the score
-                score += (timer.getTimer() + penalty);
-                printf("Incorrect click, time: %f plus %d sek punishment\nCurrent avg. Time: %f\n", timer.getTimer(), penalty, getScore(gui->getImageN()));
+                score.push_back(timer.getTimer() + penalty);
+                printf("Incorrect click, time: %f plus %d sek punishment\n", timer.getTimer(), penalty);
             }
             //set player as not afk (so if won´t be true) and break loop
             personAfk = 0;
@@ -101,7 +98,7 @@ void Gamemode::clickResult(Label labelToClick, cv::Mat image, Gui *gui) {
 
     if (personAfk){
         // if player is afk or too slow, print and add penalty to the score
-        score += (2 * penalty);
-        printf("You´re too slow or AFK, %d sek punishment\nCurrent avg. Time: %f\n", (2*penalty), getScore(gui->getImageN()));
+        score.push_back(2*penalty);
+        printf("You´re too slow or AFK, %d sek punishment\n", (2*penalty));
     }
 }
