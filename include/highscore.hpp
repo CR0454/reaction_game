@@ -8,12 +8,12 @@ class Highscore
     public:
     Highscore();
     ~Highscore();
-    bool deleteContent();
     double getHighscore();
     void setHighscore(double value);
 
     private:
     double highscore;
+    bool deleteContent();
 
 };
 

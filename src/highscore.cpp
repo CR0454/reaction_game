@@ -17,15 +17,15 @@ bool Highscore::deleteContent(){
         std::cin>>decision;
         if (decision == "yes") {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::ofstream fdeleteContent("../highscore.txt", std::ios::trunc);
+            std::ofstream fdeleteContent("../highscore.txt", std::ios::trunc); //deletes content of the file
             return 1;
         } else if (decision == "no") {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::cout<< "Please clear the file to play the game.\n";
 
         } else {
-            std::cin.clear(); //deletes error
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n'); //ignores unnecessary inputs
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::cout << "Invalid expression. Please enter 'yes' or 'no'.\n";
 
         }
