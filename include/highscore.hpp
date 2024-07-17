@@ -12,7 +12,7 @@ class Highscore
     void setHighscore(double value);
 
     private:
-    const double highscore;
+    double highscore;
 
 };
 
