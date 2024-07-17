@@ -4,7 +4,7 @@
 
 #include "../include/Gamemode_1.h"
 
-double Gamemode_1::run() {
+vector<double> Gamemode_1::run() {
     labelHandler labelHandler;
     Gui gui(sequence);
 

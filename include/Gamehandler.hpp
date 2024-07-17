@@ -15,6 +15,8 @@ public:
     Gamehandler() {}
 
     void start();
+private:
+    double showResults(std::vector<double> scores, Menu *menu);
 };
 
 

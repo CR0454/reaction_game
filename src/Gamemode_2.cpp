@@ -14,7 +14,7 @@ void Gamemode_2::waitRandomTime(int minimumMilliseconds, int maximumMilliseconds
     this_thread::sleep_for(chrono::milliseconds(randomMilliseconds)); //wait random time
 }
 
-double Gamemode_2::run() {
+vector<double> Gamemode_2::run() {
     labelHandler labelHandler;
     Gui gui(sequence);
     Timer timer;
