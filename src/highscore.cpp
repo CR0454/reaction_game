@@ -10,14 +10,14 @@ Highscore::Highscore(){
 Highscore::~Highscore(){
 };
 
-bool deleteContent(){
+bool Highscore::deleteContent(){
     std::cout<<"The content of the file is invalid. \n If you want the content to be deleted enter 'yes' and if not 'no'.\n ";
     while(true) {
         std::string decision;
         std::cin>>decision;
         if (decision == "yes") {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::ofstream fdeleteContent("../higscore.txt", std::ios::trunc);
+            std::ofstream fdeleteContent("../highscore.txt", std::ios::trunc);
             return 1;
         } else if (decision == "no") {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -50,6 +50,9 @@ double Highscore::getHighscore()
                 else{
                     break;
                 }
+            }
+            else{
+                highscore = std::stod(output);
             }
         }
         fread.close();
