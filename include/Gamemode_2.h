@@ -11,7 +11,7 @@ class Gamemode_2 : public Gamemode {
 public:
     Gamemode_2(int count, string sequence) : Gamemode(count, sequence) {} // constructor
 
-    double run() override; // run will start the game and return the score
+    vector<double> run() override; // run will start the game and return the score
 
 private:
     void waitRandomTime(int minimumMilliseconds, int maximumMilliseconds); // wait random time between minimum and maximum milliseconds

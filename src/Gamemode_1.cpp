@@ -25,5 +25,5 @@ double Gamemode_1::run() {
 
         clickResult(random_label, image, &gui);
     }
-    return getScore(count); //return final score
+    return score; //return final score vector
 }
