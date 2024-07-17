@@ -11,7 +11,7 @@
 
 class Label {
 public:
-    Label() : m_frame(0), m_type(""), m_bbox(cv::Rect()) {}
+    Label() : m_frame(-1), m_type(""), m_bbox(cv::Rect()) {}
     Label(int frame, const std::string &type, const cv::Rect &bbox)
             : m_frame(frame), m_type(type), m_bbox(bbox) {}
 
