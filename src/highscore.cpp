@@ -34,28 +34,28 @@ bool Highscore::deleteContent(){
 
 }
 
-double Highscore::getHighscore()
-{
+
+
+double Highscore::getHighscore() {
     double highscore;
     std::ifstream fread("../highscore.txt"); //reads file
     std::string output;
     std::regex onlyDouble("(^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$)");
-    if(fread) {
+    if (fread) {
         while (std::getline(fread, output)) {
-            try{
+            try {
                 highscore = std::stod(output);
             }
-            catch(std::invalid_argument){
+            catch (const std::invalid_argument) {
                 deleteContent();
-                if(deleteContent()==1){
-                    highscore = std::stod(output); // line is read in as a string and afterwards converted to a double with stod
-                }
-                else{
+                if (deleteContent() == 1) {
+                    highscore = 0; // line is read in as a string and afterwards converted to a double with stod
+                } else {
                     break;
                 }
             }
         }
-    }
+
     fread.close();
     return highscore;
     }
