@@ -11,17 +11,17 @@ Highscore::~Highscore(){
 double Highscore::getHighscore()
 {
     double highscore;
-    std::ifstream fread1("../highscore.txt"); //reads file
-    std::string output1;
-    if(fread1) {
-        while (std::getline(fread1, output1)) {
-            highscore = std::stod(output1); // line is read in as a string and afterwards converted to a double with stod
+    std::ifstream fread("../highscore.txt"); //reads file
+    std::string output;
+    if(fread) {
+        while (std::getline(fread, output)) {
+            highscore = std::stod(output); // line is read in as a string and afterwards converted to a double with stod
         }
-        fread1.close();
+        fread.close();
         return highscore;
     }
     else{
-        std::ofstream fread1("../highscore.txt"); //creates a file if it does not exist yet
+        std::ofstream fread("../highscore.txt"); //creates a file if it does not exist yet
         return 0;
     }
 }
@@ -40,10 +40,12 @@ void Highscore::setHighscore(double value) {
             highscorefile.open("../highscore.txt", std::ofstream::ate);
             highscorefile << value;
             highscorefile.close();
-        } else {
+        }
+        else {
             std::cout << "Did not reach a new Highscore";
         }
-    } else {
+    }
+    else {
         std::ofstream fread;
         fread.open("../highscore.txt", std::ofstream::ate);
         fread << value;

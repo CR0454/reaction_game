@@ -14,7 +14,7 @@ void Menu::setRounds() //no input parameters -> read in from the console
     while(true) {
         std::cout << "How many rounds would you like to play? \n";
         std::cin >> rounds;
-        if(std::cin.fail()){ //if the user does not enter an intger, he is reasked until the input is an integer
+        if(std::cin.fail()){ //if the user does not enter an integer, he is reasked until the input is an integer
             std::cin.clear(); //deletes error
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n'); //ignores unnecessary inputs
             std::cout<<"Invalid expression, please enter a number\n";
@@ -67,6 +67,7 @@ std::string Menu::getName()
 {
     return m_name;
 }
+
 void Menu::setMode()
 {
     int gamemode;
