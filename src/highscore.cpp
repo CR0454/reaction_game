@@ -42,7 +42,10 @@ double Highscore::getHighscore()
     std::regex onlyDouble("(^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$)");
     if(fread) {
         while (std::getline(fread, output)) {
-            if(!(std::regex_match(output,onlyDouble))){
+            try{
+                highscore = std::stod(output);
+            }
+            catch(std::invalid_argument){
                 deleteContent();
                 if(deleteContent()==1){
                     highscore = std::stod(output); // line is read in as a string and afterwards converted to a double with stod
@@ -51,12 +54,10 @@ double Highscore::getHighscore()
                     break;
                 }
             }
-            else{
-                highscore = std::stod(output);
-            }
         }
-        fread.close();
-        return highscore;
+    }
+    fread.close();
+    return highscore;
     }
     else{
         std::ofstream fread("../highscore.txt"); //creates a file if it does not exist yet
