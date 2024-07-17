@@ -24,6 +24,7 @@ vector<double> Gamemode_1::run() {
             i--;
         }
         else{
+
             Label random_label = randomLabel(labels_of_image); // choose random label
 
             gui.drawBox(random_label, image, 255, 0, 0); //draw red box around random label

@@ -34,6 +34,7 @@ vector<double> Gamemode_2::run() {
         if (labels_of_image.empty()) {
             i--;
         } else {
+
             Label random_label = randomLabel(labels_of_image); // choose random label
 
             //draw blue boxes around all labels
