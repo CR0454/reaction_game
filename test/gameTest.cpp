@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include "../src/menu.hpp"
 
-
 class GameTest
     : public ::testing::Test
 {
