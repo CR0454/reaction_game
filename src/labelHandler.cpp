@@ -41,7 +41,7 @@ int labelHandler::loadLabels(std::string sequence) {
             std::cerr << "Error reading line: " << line << std::endl;
         }
     }
-    std::cout << "Successfully read " << m_labels.size() << " labels from file \"" << path << "\"\n";
+    std::cout << "Successfully read " << m_labels.size() << " labels for " << m_labels.at(m_labels.size()-1).m_frame << " frames from file \"" << path << "\"\n";
 
     return 0;
 
@@ -61,7 +61,7 @@ std::vector<Label> labelHandler::getFrameLabels(int frame) {
 }
 
 std::vector<int> labelHandler::getBoxPosition(Label label) {
-    std::vector<int> boxPosition;
+    std::vector<int> boxPosition;               //Vector to store all 4 necessary dimensions to determine box position
     boxPosition.push_back(label.m_bbox.x);
     boxPosition.push_back(label.m_bbox.y);
     boxPosition.push_back(label.m_bbox.x + label.m_bbox.width);
