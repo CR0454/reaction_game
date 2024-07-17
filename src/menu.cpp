@@ -34,7 +34,7 @@ int Menu::getRounds()
 
 void Menu::setSequence()
 {
-    std::regex pattern("^00([0-1][0-9]|20))$"); // all numbers between 0010 and 0020 (only in this format)
+    std::regex pattern("^00([0-1][0-9]|20))$"); // all numbers between 0000 and 0020 (only in this format)
     std::cout<<"Which sequence would you like to play? (Enter a number between 0001 and 0020)\n";
     std::string sequence;
     while(true){
