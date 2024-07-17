@@ -2,7 +2,7 @@
 #include "../include/menu.hpp"
 #include <regex>
 
-void Menu::setN() //keine Parameter, da die Werte direkt eingelesen werden in der Funktion
+void Menu::setRounds() //keine Parameter, da die Werte direkt eingelesen werden in der Funktion
 {
     int x;
 
@@ -16,15 +16,15 @@ void Menu::setN() //keine Parameter, da die Werte direkt eingelesen werden in de
         }
         else {
             std::cin.ignore(1000,'\n');
-            Menu::n = x;
+            Menu::m_rounds = x;
             break;
         }
     }
 }
 
-int Menu::getN()
+int Menu::getRounds()
 {
-    return n;
+    return m_rounds;
 }
 
 void Menu::setSequence()
@@ -40,12 +40,12 @@ void Menu::setSequence()
     else {
         std::cin.ignore(1000, '\n');
 
-        sequence = y;
+        m_sequence = y;
     }
 }
 std::string Menu::getSequence()
 {
-    return sequence;
+    return m_sequence;
 }
 
 void Menu::setName()
@@ -53,10 +53,10 @@ void Menu::setName()
     std::cout<<"Please enter your name: \n";
     std::string m_name;
     std::cin>>m_name;
-    name = m_name;
+    m_name = m_name;
 }
 
 std::string Menu::getName()
 {
-    return name;
+    return m_name;
 }

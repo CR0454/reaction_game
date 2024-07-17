@@ -6,13 +6,15 @@
 #define KLASSENDIAGRAMM_DRAWIO_GAMEMODE_2_H
 
 #include "Gamemode.h"
-#include <string>
 
 class Gamemode_2 : public Gamemode {
 public:
-    Gamemode_2(int count, std::string sequenz): Gamemode(count, sequenz) {}
-    virtual ~Gamemode_2();
-    double run() override;
+    Gamemode_2(int count, string sequence) : Gamemode(count, sequence) {} // constructor
+
+    double run() override; // run will start the game and return the score
+
+private:
+    void waitRandomTime(int minimumMilliseconds, int maximumMilliseconds); // wait random time between minimum and maximum milliseconds
 };
 
 #endif //KLASSENDIAGRAMM_DRAWIO_GAMEMODE_2_H

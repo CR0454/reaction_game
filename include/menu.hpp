@@ -5,8 +5,8 @@
 class Menu
 {
     public:
-    Menu();
-    ~Menu();
+    Menu() {}
+    ~Menu() {}
     void setRounds();
     int getRounds();
     void setSequence();
